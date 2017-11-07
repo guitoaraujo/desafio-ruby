@@ -7,6 +7,7 @@ end
 
 #novas gems
 gem 'devise'
+gem 'httparty'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
