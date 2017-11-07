@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-#novas gems
+#novas gems novas gems
 gem 'devise'
 gem 'httparty'
 
