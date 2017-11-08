@@ -31,6 +31,21 @@ class TesteController < ApplicationController
     @response = ary2
     @CONTADOR = @response.count
 
+    while @i<@CONTADOR
+      @z = 0
+
+      while(@z<50)
+
+        @nome = @teste[@z]["productName"]
+        @url  = @teste[@z]["linkText"]
+        @preco = @teste[@z]["productName"]
+        @parcela  = @teste[@z]["linkText"]
+        @imagem = @teste[@z]["images"]
+        @z = @z+1
+      end
+      @i = @i+1
+    end
+
   end
 
 end

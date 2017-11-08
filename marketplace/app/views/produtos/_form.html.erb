@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :loja %>
+    <%= form.select :loja_id, @loja.collect { |l| [l.nome, l.id] } %>
+  </div>
+
+  <div class="field">
     <%= form.label :nome %>
     <%= form.text_field :nome, id: :produto_nome %>
   </div>

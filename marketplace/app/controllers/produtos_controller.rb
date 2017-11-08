@@ -6,6 +6,7 @@ class ProdutosController < ApplicationController
   # GET /produtos.json
   def index
     @produtos = Produto.all
+    @lojas = Loja.all
   end
 
   # GET /produtos/1
@@ -16,6 +17,8 @@ class ProdutosController < ApplicationController
   # GET /produtos/new
   def new
     @produto = current_user.produtos.build
+    @loja = Loja.all
+
   end
 
   # GET /produtos/1/edit
@@ -66,10 +69,11 @@ class ProdutosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_produto
       @produto = Produto.find(params[:id])
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def produto_params
-      params.require(:produto).permit(:nome, :preco, :parcelas, :imagem, :url)
+      params.require(:produto).permit(:nome, :preco, :parcelas, :imagem, :url, :loja_id)
     end
 end
