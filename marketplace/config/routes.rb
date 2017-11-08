@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  resources :produtos
   devise_for :users
   resources :lojas
+
+  root 'produtos#index'
 
   get 'teste/initialize'
   #resources :teste

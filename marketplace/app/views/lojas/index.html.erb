@@ -9,6 +9,7 @@
       <th>Website</th>
       <th>Logo</th>
       <th>Email</th>
+      <th>User-email</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,9 +21,12 @@
         <td><%= loja.website %></td>
         <td><%= loja.logo %></td>
         <td><%= loja.email %></td>
-        <td><%= link_to 'Show', loja %></td>
-        <td><%= link_to 'Edit', edit_loja_path(loja) %></td>
-        <td><%= link_to 'Destroy', loja, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= loja.user.email %></td>
+        <% if loja.user == current_user %>
+          <td><%= link_to 'Show', loja %></td>
+          <td><%= link_to 'Edit', edit_loja_path(loja) %></td>
+          <td><%= link_to 'Destroy', loja, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
