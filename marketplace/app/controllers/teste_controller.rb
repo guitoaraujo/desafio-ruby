@@ -16,36 +16,49 @@ class TesteController < ApplicationController
       response = HTTParty.get(ary[j])
       #puts response.body, response.code, response.message, response.headers.inspec
       j = j+1
-
       @teste = JSON.parse response.body
-
-      # => "ABC Widget 2.0"
       ary2.push(@teste)
-
     end
 
     @i = 0
-    @z = 0
-    @resultado = ""
-
     @response = ary2
-    @CONTADOR = @response.count
+    @count = @response.count
 
-    while @i<@CONTADOR
+    #resgatar valores dos campos
+    while @i<@count
       @z = 0
+      while @z<50 #nome preco parcelas imagem url
+        @parcelas    = @response[@i][@z]["items"][0]["sellers"][0]["commertialOffer"]["Installments"]
 
-      while(@z<50)
+        arrayParcelas = []
+        @parcelas.each do |p|
+          @numParcela = p["NumberOfInstallments"]
+          arrayParcelas[@numParcela] = @numParcela
 
-        @nome = @teste[@z]["productName"]
-        @url  = @teste[@z]["linkText"]
-        @preco = @teste[@z]["productName"]
-        @parcela  = @teste[@z]["linkText"]
-        @imagem = @teste[@z]["images"]
+        end
+        @totalParcelas = arrayParcelas.count - 1
+        @produtoNome = @response[@i][@z]["productName"]
+        @preco       = @response[@i][@z]["items"][0]["sellers"][0]["commertialOffer"]["Installments"][0]["Value"] #$v->items[0]->sellers[0]->commertialOffer->Installments[0]->Value;
+        @imagem      = @response[@i][@z]["items"][0]["images"][0]["imageUrl"]#$v->items[0]->images[0]->imageUrl;
+        @url         = @response[@i][@z]["link"]#$v->link;
+
+=begin
+        #grava produto no banco
+        Produto.create!(
+          nome: @produtoNome,
+          preco: @preco,
+          imagem: @imagem,
+          url: @url,
+          parcelas: @totalParcelas,
+          user_id: 1,
+          loja_id: 1
+        )
+=end
         @z = @z+1
       end
       @i = @i+1
     end
+    @i = 0
 
   end
-
 end

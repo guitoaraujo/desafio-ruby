@@ -9,14 +9,17 @@
   </head>
 
   <body>
-    
+
   	<p class="notice"><%= notice %></p>
   	<p class="alert"><%= alert %></p>
   	<p><%= link_to "Sign_up", new_user_registration_path %></p>
+
+
+
     <% if user_signed_in? %>
-        <p><%= link_to "Sign_in", new_user_session_path %></p>
+        <p><%= link_to "Sign_out", destroy_user_session_path, method: :delete %></p>
     <% else %>
-        <p><%= link_to "Sign_out", destroy_user_session_path %></p>
+        <p><%= link_to "Sign_in", new_user_session_path %></p>
     <% end %>
 
     <%= yield %>

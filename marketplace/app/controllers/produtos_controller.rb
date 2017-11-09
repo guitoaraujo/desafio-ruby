@@ -17,7 +17,7 @@ class ProdutosController < ApplicationController
   # GET /produtos/new
   def new
     @produto = current_user.produtos.build
-    @loja = Loja.all
+    @loja = Loja.where("user_id = ?", current_user.id)
 
   end
 

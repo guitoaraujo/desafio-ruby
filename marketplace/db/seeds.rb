@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+#criar lojas
+Loja.create(nome:"Fossil", website:"fossil.com.br", logo:"fossil-logo.png", email:"fossil@fossil.com.br", user_id: 1)

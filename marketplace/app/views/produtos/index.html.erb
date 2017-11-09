@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Produtos</h1>
+<!--<h1>Produtos</h1>
 
 <table border="1">
   <thead>
@@ -37,6 +37,22 @@
   </tbody>
 </table>
 
-<br>
+<br>-->
+
+<!-- GRID -->
+<table border="1">
+  <thead>
+    <th colspan="3"></th>
+  </thead>
+  <tbody>
+    <% @produtos.each do |p| %>
+      <tr>
+        <td><%= p.nome %></td>
+        <td><%= p.preco %></td>
+        <td><%= p.parcelas %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'New Produto', new_produto_path %>

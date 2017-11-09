@@ -1,4 +1,3 @@
-<%= @response %>
 <table border="1">
   <tr>
     <td></td>
@@ -6,30 +5,23 @@
     <td>PRODUTO NOME</td>
     <td>BRAND</td>
 </tr>
-<%
-@linha=1
-while @i<@CONTADOR
-  @z = 0
-
-  while(@z<50)
-
-    @produtoID   = @teste[@z]["productId"]
-    @produtoNome = @teste[@z]["productName"]
-    @brand       = @teste[@z]["brand"]
-
+<% while @i<@count
+    @z = 0
+    while @z<50
+      @produtoID   = @response[@i][@z]["productId"]
+      @produtoNome = @response[@i][@z]["productName"]
+      @brand       = @response[@i][@z]["brand"]
 %>
-    <tr>
-      <td><%=@linha%></td>
-      <td><%= @produtoID %></td>
-      <td><%=@produtoNome %></td>
-      <td><%=@brand%></td>
-    </tr>
+      <tr>
+        <td><%= @linha %></td>
+        <td><%= @produtoID %></td>
+        <td><%= @produtoNome %></td>
+        <td><%= @brand %></td>
+      </tr>
 <%
-  @z = @z+1
-  @linha = @linha+1
-
+    @z = @z+1
+    end
+  @i = @i+1
   end
-@i = @i+1
-end
 %>
 </table>
