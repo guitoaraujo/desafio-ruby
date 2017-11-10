@@ -5,7 +5,7 @@ class ProdutosController < ApplicationController
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = Produto.all
+    @produtos = Produto.order("RANDOM()")
     @lojas = Loja.all
   end
 

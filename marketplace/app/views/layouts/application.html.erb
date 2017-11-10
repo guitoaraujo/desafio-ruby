@@ -12,16 +12,22 @@
 
   	<p class="notice"><%= notice %></p>
   	<p class="alert"><%= alert %></p>
-  	<p><%= link_to "Sign_up", new_user_registration_path %></p>
-
-
-
-    <% if user_signed_in? %>
+    <%= nav_bar brand: "..:MARKETPLACE:..", brand_link: root_path, fixed: :top, responsive: true do %>
+      <%= menu_group do %>
+        <% if user_signed_in? %>
+          <%= menu_item "Sign_out", destroy_user_session_path, method: :delete %>
+        <% else %>
+            <%= menu_item "Sign_in", new_user_session_path %>
+            <%= menu_item "Sign_up", new_user_registration_path %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <!--<% if user_signed_in? %>
         <p><%= link_to "Sign_out", destroy_user_session_path, method: :delete %></p>
     <% else %>
         <p><%= link_to "Sign_in", new_user_session_path %></p>
-    <% end %>
-
+        <p><%= link_to "Sign_up", new_user_registration_path %></p>
+    <% end %>-->
     <%= yield %>
   </body>
 </html>
