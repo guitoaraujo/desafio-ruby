@@ -11,6 +11,8 @@ gem 'devise'
 gem 'httparty'
 gem 'bcrypt', '~> 3.1.11'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -55,7 +57,11 @@ group :development do
 end
 
 group :production do
+<<<<<<< HEAD
   gem 'pg' 
+=======
+  gem 'pg'
+>>>>>>> 968f4ca8d546af7ed288990bcbd990da91857e92
   gem 'rails_12factor'
 end
 

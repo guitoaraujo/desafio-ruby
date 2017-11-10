@@ -5,7 +5,14 @@ class ProdutosController < ApplicationController
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = Produto.order("RANDOM()")
+    if params[:query].present?
+      #@produtos = Produto.where("nome LIKE ?", "%#{params[:query]}")
+      #@produtos = Produto.search(params[:query])
+      #@produtos = Produto.find_by(:all, :conditions => ['nome LIKE ?', "%#{params[:query]}%"])
+      #@q = params[:query]
+    else
+      @produtos = Produto.order("RANDOM()")
+    end
     @lojas = Loja.all
   end
 

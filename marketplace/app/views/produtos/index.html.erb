@@ -54,13 +54,18 @@
   </tbody>
 </table>
 -->
+<!-- SEARCH -->
 
-
+<%= form_tag produtos_path, method: :get do %>
+  <%= text_field_tag :query, params[:query] %>
+  <%= submit_tag 'VAI', name: nil %>
+<% end %>
+<%= @q %>
 <!-- GRID -->
 <div class="container">
   <div class="row">
     <% @produtos.each do |produto| %>
-      <div class="col-md-3">
+      <div class="col-sm-3">
         <div class="card">
           <% if produto.imagem.length >0 %>
             <img class="card-img-top produto-id-<%=produto.id %> d-flex justify-content-between" style="width: 140px; margin-top: 5px;"  src="<%= produto.imagem  %>" alt="Card image cap">
