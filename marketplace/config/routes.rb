@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  root 'produtos#index'
+
   resources :produtos
   devise_for :users
   resources :lojas
-
-  root 'produtos#index'
 
   get 'empresas/index'
   get 'empresas/getFossil'

@@ -1,81 +1,37 @@
 <%- model_class = Produto -%>
 
-
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-  <%= link_to t('.new', :default => t("helpers.links.novo")),
-              new_produto_path,
-              :class => 'btn btn-primary' %>
-</div>
-<!--
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:nome) %></th>
-      <th><%= model_class.human_attribute_name(:preco) %></th>
-      <th><%= model_class.human_attribute_name(:parcelas) %></th>
-      <th><%= model_class.human_attribute_name(:imagem) %></th>
-      <th><%= model_class.human_attribute_name(:url) %></th>
-      <th><%= model_class.human_attribute_name(:loja_id) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @produtos.each do |produto| %>
-      <tr>
-        <td><%= link_to produto.id, produto_path(produto) %></td>
-        <td><%= produto.nome %></td>
-        <td><%= produto.preco %></td>
-        <td><%= produto.parcelas %></td>
-        <td><%= produto.imagem %></td>
-        <td><%= produto.url %></td>
-        <td><%= produto.loja_id %></td>
-        <td><%= produto.user_id %></td>
-        <td><%=l produto.created_at %></td>
-        <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      produto_path(produto), :class => 'btn btn-default btn-xs' %>
-
-          <% if user_signed_in? and current_user.id == produto.user_id %>
-            <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_produto_path(produto), :class => 'btn btn-default btn-xs' %>
-            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                        produto_path(produto),
-                        :method => :delete,
-                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                        :class => 'btn btn-xs btn-danger' %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
--->
-
-
 <!-- GRID -->
 <div class="container">
   <div class="row">
-    <% @produtos.each do |produto| %>
-      <div class="col-md-3">
-        <div class="card">
-          <% if produto.imagem.length >0 %>
-            <img class="card-img-top produto-id-<%=produto.id %> d-flex justify-content-between" style="width: 140px; margin-top: 5px;"  src="<%= produto.imagem  %>" alt="Card image cap">
-          <% else %>
-            <img class="card-img-top produto-id-<%=produto.id %> d-flex justify-content-between" style="width: 140px; margin-top: 5px;"  src="http://monzeiros.com.br/forum/download/file.php?avatar=26544_1464791396.jpg" alt="Card image cap">
-          <% end %>
-          <div class="card-block">
-            <!--<h4 class="card-title"><%=produto.nome.truncate_words(3, omission: '...') %></h4>-->
-            <h6 class="card-title" style="font-weight: bold;"><%=produto.nome.truncate_words(2, omission: '') %></h6>
-            <p class="card-text"><%=produto.preco %></p>
-            <a href="<%=produto.url %>" class="btn btn-primary btn-block">More</a>
+    <% if @produtos.count > 0 %>
+      <% @produtos.each do |produto| %>
+        <div class="col-md-3">
+          <div class="card">
+            <% if produto.imagem.length >0 %>
+              <img 
+                class="card-img-top produto-id-<%=produto.id %> d-flex justify-content-between" 
+                style="width: 140px; margin-top: 5px;"  
+                src="<%= produto.imagem  %>" 
+                alt="Card image cap"
+              >
+            <% else %>
+              <img 
+                class="card-img-top produto-id-<%=produto.id %> d-flex justify-content-between" 
+                style="width: 140px; margin-top: 5px;"  
+                src="http://monzeiros.com.br/forum/download/file.php?avatar=26544_1464791396.jpg" 
+                alt="Card image cap"
+              >
+            <% end %>
+            <div class="card-block">
+              <h6 class="card-title" style="font-weight: bold;"><%=produto.nome.truncate_words(2, omission: '') %></h6>
+              <p class="card-text"><%=produto.preco %></p>
+              <a href="<%=produto.url %>" class="btn btn-primary btn-block">More</a>
+            </div>
           </div>
         </div>
-      </div>
-
+      <% end %>    
+    <% else %>
+      <p>Não existem produtos cadastrados...</p>
     <% end %>
   </div>
 </div>

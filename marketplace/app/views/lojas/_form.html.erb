@@ -1,37 +1,56 @@
-<%= form_with(model: loja, local: true) do |form| %>
-  <% if loja.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(loja.errors.count, "error") %> prohibited this loja from being saved:</h2>
+<%= form_for @loja, :html => { :class => "form-horizontal loja" } do |f| %>
 
-      <ul>
-      <% loja.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @loja.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@loja.errors.count, "error") %> prohibited this loja from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @loja.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :nome %>
-    <%= form.text_field :nome, id: :loja_nome %>
+  <div class="form-group">
+    <%= f.label :nome, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :nome, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:nome) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :website, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :website, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:website) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :logo, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :logo, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:logo) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :email, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:email) %>
+  </div>
+  
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit "Cadastrar", :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancelar")),
+                lojas_path, :class => 'btn btn-warning' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :website %>
-    <%= form.text_field :website, id: :loja_website %>
-  </div>
-
-  <div class="field">
-    <%= form.label :logo %>
-    <%= form.text_field :logo, id: :loja_logo %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :loja_email %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

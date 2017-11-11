@@ -50,27 +50,27 @@
     </div>
     <%=f.error_span(:url) %>
   </div>
+
+  <!-- SELECT -->
   <div class="form-group">
     <%= f.label :loja_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :loja_id, :class => 'form-control' %>
+      <select>
+        <%= @lojas.each do |l| %>
+          <option value="<%= l.id %>"><%= l.nome %></option>
+        <% end %>
+      </select>
     </div>
     <%=f.error_span(:loja_id) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :user_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :user_id, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:user_id) %>
-  </div>
+  </div>    
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                produtos_path, :class => 'btn btn-default' %>
+      <%= f.submit 'Cadastrar', :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancelar")),
+                produtos_path, :class => 'btn btn-warning' %>
     </div>
   </div>
 
 <% end %>
+
