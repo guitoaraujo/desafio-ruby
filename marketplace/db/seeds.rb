@@ -8,3 +8,7 @@
 
 #criar lojas
 Loja.create(nome:"Fossil", website:"fossil.com.br", logo:"fossil-logo.png", email:"fossil@fossil.com.br", user_id: 1)
+Loja.create(nome:"Timex", website:"timex.com.br", logo:"timex-logo.png", email:"timex@fossil.com.br", user_id: 1)
+Loja.create(nome:"Schumann", website:"schumann.com.br", logo:"schumann-logo.png", email:"schumann@fossil.com.br", user_id: 1)
+
+

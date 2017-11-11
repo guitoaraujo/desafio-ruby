@@ -55,11 +55,8 @@ group :development do
 end
 
 group :production do
-<<<<<<< HEAD
   gem 'pg'
-<<<<<<< HEAD
-
-  gem 'rails_12factor'
+  
 end
 
 
