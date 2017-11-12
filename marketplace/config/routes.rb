@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :lojas
 
   get 'empresas/index'
+  get 'empresas/setAdmin'
   get 'empresas/getFossil'
   get 'empresas/getTimex'
   get 'empresas/getSchumann'

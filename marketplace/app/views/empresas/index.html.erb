@@ -3,10 +3,12 @@
     <td>FOSSIL</td>
     <td>TIMEX</td>
     <td>SCHUMANN</td>
+    <td>ADMIN</td>
   </tr>
   <tr>
-    <td><%= @fossil.count>0?   "OK":"NO" %></td>
-    <td><%= @timex.count>0?    "OK":"NO" %></td>
-    <td><%= @schumann.count>0? "OK":"NO" %></td>
+    <td><%= @proFossil?   "OK" : "NO" %></td>
+    <td><%= @proTimex?    "OK" : "NO" %></td>
+    <td><%= @proSchumann? "OK" : "NO" %></td>
+    <td><%= @admin.count>0? @admin[0].email : "Nenhum" %></td>
   </tr>
 </table>

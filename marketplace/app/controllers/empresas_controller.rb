@@ -1,8 +1,9 @@
 class EmpresasController < ApplicationController
   before_action :authenticate_user!
+  before_action :checkAdmin, except: [:setAdmin]
   
   include HTTParty
-  base_uri 'https://www.fossil.com.br/api/catalog_system/pub/products/search/'
+  #base_uri 'https://www.fossil.com.br/api/catalog_system/pub/products/search/'
   
   #get das empresas separados :D
   #fossil aprensentou valores nil em alguns preços. Replicada prevenção.
@@ -12,17 +13,42 @@ class EmpresasController < ApplicationController
 
 
   def index
-    @fossil   = Produto.where(loja_id: 1)
-    @timex    = Produto.where(loja_id: 2)
-    @schumann = Produto.where(loja_id: 3)
+    @fossil        = Loja.where(nome: "Fossil")
+    if @fossil.count>0
+      @proFossil   = Produto.where(loja_id: @fossil[0].id)
+    end
+      
+    @timex         = Loja.where(nome: "Timex")
+    if @timex.count>0 
+      @proTimex    = Produto.where(loja_id: @timex[0].id)
+    end
+
+    @schumann      = Loja.where(nome: "Schumann")
+    if @schumann.count>0
+      @proSchumann = Produto.where(loja_id: @schumann[0].id)
+    end
+
+    @admin         = User.where(admin: true)
   end  
 
+  # STEP 1
+  def setAdmin
+    User.create(email: 'admin@admin.com.br', password: '123456', admin: true)
+    redirect_to action: "index"
+  end
 
+  # STEP 2
   ###################################################################
   ###FOSSIL FOSSIL FOSSIL
   ###################################################################
   def getFossil 
     require 'json'
+    Loja.create(nome:"Fossil", website:"fossil.com.br", logo:"fossil-logo.png", email:"fossil@fossil.com.br", user_id: current_user.id)
+    loja = Loja.where(nome: "Fossil")
+    puts loja.count
+    if loja.count<=0
+      redirect_to action: "index" 
+    end  
     j    = 0
     ary2 = Array.new #array que armazena as buscas(0-49 e 50-99)
     ary = [
@@ -69,8 +95,8 @@ class EmpresasController < ApplicationController
           imagem: @imagem,
           url: @url,
           parcelas: @totalParcelas,
-          user_id: 1,#ID USER DEFAULT
-          loja_id: 1 #ID FOSSIL
+          user_id: current_user.id, #ID USER DEFAULT
+          loja_id: loja[0].id #ID FOSSIL
         )
         
         @z = @z+1
@@ -90,6 +116,11 @@ class EmpresasController < ApplicationController
   ###################################################################
   def getTimex 
     require 'json'
+    Loja.create(nome:"Timex", website:"timex.com.br", logo:"timex-logo.png", email:"timex@fossil.com.br", user_id: current_user.id)
+    loja = Loja.where(nome: "Timex")
+    if loja.count<=0
+      redirect_to action: "index" 
+    end
     j    = 0
     ary2 = Array.new #array que armazena as buscas(0-49 e 50-99)
     ary = [
@@ -136,8 +167,8 @@ class EmpresasController < ApplicationController
           imagem: @imagem,
           url: @url,
           parcelas: @totalParcelas,
-          user_id: 1,#ID USER DEFAULT
-          loja_id: 2 #ID TIMEX
+          user_id: current_user.id,#ID USER DEFAULT
+          loja_id: loja[0].id #ID TIMEX
         )
         
         @z = @z+1
@@ -155,6 +186,11 @@ class EmpresasController < ApplicationController
   ###################################################################
   def getSchumann 
     require 'json'
+    Loja.create(nome:"Schumann", website:"schumann.com.br", logo:"schumann-logo.png", email:"schumann@fossil.com.br", user_id: current_user.id)
+    loja = Loja.where(nome: "Schumann")
+    if loja.count<=0
+      redirect_to action: "index" 
+    end
     j    = 0
     ary2 = Array.new #array que armazena as buscas(0-49 e 50-99)
     ary = [
@@ -201,8 +237,8 @@ class EmpresasController < ApplicationController
           imagem: @imagem,
           url: @url,
           parcelas: @totalParcelas,
-          user_id: 1,#ID USER DEFAULT
-          loja_id: 3 #ID SCHUMANN
+          user_id: current_user.id,#ID USER DEFAULT
+          loja_id: loja[0].id #ID SCHUMANN
         )
         
         @z = @z+1
@@ -213,5 +249,13 @@ class EmpresasController < ApplicationController
 
     #redirect_to controller: :produtos
     redirect_to action: "index"
+  end
+
+  private
+
+  def checkAdmin
+    if !current_user or current_user.admin != true
+      redirect_to root_path
+    end
   end
 end

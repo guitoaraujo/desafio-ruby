@@ -5,8 +5,14 @@ class ProdutosController < ApplicationController
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = Produto.order("RANDOM()")
+    
+    @produtos = if params[:busca]
+      Produto.where('nome LIKE ?', "%#{params[:busca]}%")
+    else
+      Produto.order("RANDOM()")
+    end
     @lojas = Loja.all
+    
   end
 
   # GET /produtos/1
